@@ -163,7 +163,7 @@
     <properties>
         <java.version>1.8</java.version>
         <drools.version>7.23.0.Final</drools.version>
-        <start-class>com.zjubiomedit.Application</start-class>
+        <start-class>com.recovery.Application</start-class>
     </properties>
 
 

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AutoTask {
 
     @Async
-    @Scheduled(cron = "0 0 0 ? * 1")
-//    @Scheduled(cron = "*/5 * * * * ?") //test
+//    @Scheduled(cron = "0 0 0 ? * 1")
+    @Scheduled(cron = "*/5 * * * * ?") //test
     public void generateGreetings() {
         log.info("hello");
     }

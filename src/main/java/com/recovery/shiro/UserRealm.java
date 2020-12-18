@@ -1,30 +1,14 @@
 package com.recovery.shiro;
 
-import com.recovery.config.exception.CommonJsonException;
-import com.recovery.dao.Dict.OrgDictRepository;
-import com.recovery.dao.User.DoctorUserAuthsRepository;
-import com.recovery.dto.DoctorEndDto.DoctorUserLoginDto;
-import com.recovery.entity.Dict.OrgDict;
-import com.recovery.entity.User.DoctorUserAuths;
-import com.recovery.util.Utils;
-import com.recovery.util.enums.ErrorEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Optional;
 
 @Slf4j
 public class UserRealm extends AuthorizingRealm {
-    @Autowired
-    DoctorUserAuthsRepository doctorUserRepository;
-    @Autowired
-    OrgDictRepository orgDictRepository;
-
     // 执行授权逻辑
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {

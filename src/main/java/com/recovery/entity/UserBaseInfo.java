@@ -15,10 +15,10 @@ public class UserBaseInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 11)
-    private Integer serialNo;
+    private Long serialNo;
     //用户ID
     @Column(nullable = false, length = 11)
-    private Integer userID;
+    private Long userID;
     //姓名
     @Column(nullable = false, length = 20)
     private String name;
@@ -31,7 +31,7 @@ public class UserBaseInfo {
     private Date dateOfBirth;
     //身高：单位：cm
     @Column(length = 11)
-    private Integer height;
+    private Float height;
     //体重：单位：kg
     @Column
     private Float weight;

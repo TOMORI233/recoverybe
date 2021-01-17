@@ -12,7 +12,7 @@ public class VideoStore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 11)
-    private Integer videoID;
+    private Long videoID;
 
     //视频Url
     @Column(nullable = false, length = 200)

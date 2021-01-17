@@ -12,8 +12,8 @@ public class TrainingItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 11)
-    private Integer trainingItemID;
+    private Long trainingItemID;
     //方案内容
-    @Column(length = 50)
+    @Column(length = 1000)
     private String trainingItemContent;
 }

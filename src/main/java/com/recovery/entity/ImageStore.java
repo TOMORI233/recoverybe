@@ -12,7 +12,7 @@ public class ImageStore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 11)
-    private Integer imageID;
+    private Long imageID;
 
     //图片url
     @Column(nullable = false, length = 200)

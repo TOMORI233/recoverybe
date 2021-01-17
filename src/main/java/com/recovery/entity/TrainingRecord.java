@@ -1,5 +1,6 @@
 package com.recovery.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -14,11 +15,11 @@ public class TrainingRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 11)
-    private Integer serialNo;
+    private Long serialNo;
 
     //训练计划
     @Column(nullable = false, length = 11)
-    private Integer planID;
+    private Long planID;
 
     //今日已完成时长：单位 min
     @Column(nullable = false)
@@ -30,6 +31,7 @@ public class TrainingRecord {
 
     //记录时间：@Create
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
     @Column(nullable = false)
     private Date recordDateTime;

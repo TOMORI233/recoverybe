@@ -16,11 +16,11 @@ public class TrainingPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 11)
-    private Integer serialNo;
+    private Long serialNo;
 
     //用户ID
     @Column(nullable = false, length = 11)
-    private Integer userID;
+    private Long userID;
 
     //损伤类型：0-颈椎韧带损伤，1-颈部肌肉痉挛，2-神经根型颈椎病，3-颈型颈椎病，4-颈椎椎管狭窄症，5-神经外伤，6-慢性疼痛，7-其他
     @Column(nullable = false, length = 11)
@@ -64,6 +64,7 @@ public class TrainingPlan {
 
     //计划制定时间：@Create
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @CreatedDate
     @Column(nullable = false)
     private Date createDateTime;

@@ -1,7 +1,6 @@
 package com.recovery.entity;
 
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -10,7 +9,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @Entity
-public class TrainingPlan {
+public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -19,19 +18,20 @@ public class TrainingPlan {
     @Column(nullable = false, length = 50)
     private String userID;
 
-    // 训练方案序号: 0-颈椎病疼痛训练计划 1-颈部痉挛锻炼方案 2-颈部拉伤锻炼方案 3-颈部慢性疼痛缓解训练计划
-    @Column(nullable = false)
-    private Integer planID;
+    @Column(length = 20)
+    private String phoneNum;
 
+    //性别：0-未知，1-男，2-女
+    @Column(nullable = false)
+    private Integer sex = 0;
+
+    //出生日期
     @Temporal(TemporalType.DATE)
-    @CreatedDate
-    private Date createdDate;
+    private Date dateOfBirth;
 
-    // 从0开始编码
-    @Column(nullable = false)
-    private Integer actionNum = 0;
+    //身高：单位：cm
+    private Float height;
 
-    // 整数百分比
-    @Column(nullable = false)
-    private Integer actionPercent = 0;
+    //体重：单位：kg
+    private Float weight;
 }

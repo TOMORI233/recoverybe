@@ -33,9 +33,9 @@ public class PlanController {
 
     @ApiOperation(value = "更新方案进度")
     @PutMapping("/process")
-    public Result updatePlanProcess(@RequestParam(value = "userID") String userID,
+    public Result updatePlanProcess(@RequestParam(value = "serialNo") Long serialNo,
                                     @RequestParam(value = "actionNum") Integer actionNum,
                                     @RequestParam(value = "actionPercent") Integer actionPercent) {
-        return planService.updatePlanProcess(userID, actionNum, actionPercent);
+        return planService.updatePlanProcess(serialNo, actionNum, actionPercent);
     }
 }

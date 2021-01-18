@@ -7,6 +7,9 @@ import java.util.Date;
 
 public class Utils {
 
+    public static Integer USER_NEW = 1;
+    public static Integer USER_OLD = 0;
+
     public static String formatDateToDay(Date date){
         SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
         return ft.format(date);

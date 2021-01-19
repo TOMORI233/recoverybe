@@ -43,7 +43,7 @@ public class PlanController {
     @PutMapping("/process")
     public Result updatePlanProcess(@RequestParam(value = "serialNo") Long serialNo,
                                     @RequestParam(value = "actionNum") Integer actionNum,
-                                    @RequestParam(value = "actionPercent") Integer actionPercent) {
-        return planService.updatePlanProcess(serialNo, actionNum, actionPercent);
+                                    @RequestParam(value = "actionSec") Integer actionSec) {
+        return planService.updatePlanProcess(serialNo, actionNum, actionSec);
     }
 }

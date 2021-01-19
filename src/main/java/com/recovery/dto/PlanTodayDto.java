@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Data
-public class PlanHistDto {
+public class PlanTodayDto {
     private Long serialNo;
     private Integer newUser = Utils.USER_OLD;
     private String userID;

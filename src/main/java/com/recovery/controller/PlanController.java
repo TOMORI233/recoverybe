@@ -4,8 +4,6 @@ import com.recovery.dto.NewPlanDto;
 import com.recovery.service.impl.PlanServiceImpl;
 import com.recovery.util.Result;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,15 +24,20 @@ public class PlanController {
         return planService.createNewPlan(newPlanDto);
     }
 
+    @ApiOperation(value = "查询当天方案")
+    @GetMapping("/today")
+    public Result getPlanToday(@RequestParam(value = "userID") String userID) {
+        return planService.getPlanToday(userID);
+    }
+
+
     @ApiOperation(value = "查询指定日期方案")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "date", dataType = "date", value = "yyyy/MM/dd", required = true, defaultValue = "2021/01/01", example = "2021/01/01")
-    })
     @GetMapping("/history")
     public Result getPlanHistByDate(@RequestParam(value = "userID") String userID,
-                                    Date date) {
+                                    @RequestParam(value = "date") Date date) {
         return planService.getPlanHistByDate(userID, date);
     }
+
 
     @ApiOperation(value = "更新方案进度")
     @PutMapping("/process")

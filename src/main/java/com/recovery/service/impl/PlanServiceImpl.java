@@ -2,7 +2,8 @@ package com.recovery.service.impl;
 
 import com.recovery.dao.TrainingPlanRepository;
 import com.recovery.dto.NewPlanDto;
-import com.recovery.dto.PlanHistDto;
+import com.recovery.dto.PlanHistoryDto;
+import com.recovery.dto.PlanTodayDto;
 import com.recovery.entity.TrainingPlan;
 import com.recovery.service.PlanService;
 import com.recovery.util.Result;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -73,20 +73,29 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public Result getPlanHistByDate(String userID, Date date) {
-        PlanHistDto planHistDto = new PlanHistDto();
-        Optional<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findByUserIDAndCreatedDateGreaterThanEqual(userID, date);
-        if (trainingPlanOptional.isPresent()) {
-            TrainingPlan trainingPlan = trainingPlanOptional.get();
-            BeanUtils.copyProperties(trainingPlan, planHistDto);
+    public Result getPlanToday(String userID) {
+        PlanTodayDto planTodayDto = new PlanTodayDto();
+        Optional<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findByUserIDOrderByCreatedDateDesc(userID);
+        if(trainingPlanOptional.isPresent()){
+                TrainingPlan trainingPlan = trainingPlanOptional.get();
+                BeanUtils.copyProperties(trainingPlan, planTodayDto);
         } else {
-            List<TrainingPlan> list = trainingPlanRepository.findByUserIDOrderByCreatedDateDesc(userID);
-            if (list.isEmpty()) {
-                planHistDto.setNewUser(Utils.USER_NEW);
-            }
+            planTodayDto.setNewUser(Utils.USER_NEW);
         }
-        return new Result(planHistDto);
+        return new Result(planTodayDto);
     }
+
+    @Override
+    public Result getPlanHistByDate(String userID, Date date) {
+        PlanHistoryDto planHistoryDto = new PlanHistoryDto();
+        Optional<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findByUserIDAndCreatedDate(userID, date);
+        if(trainingPlanOptional.isPresent()){
+            TrainingPlan trainingPlan = trainingPlanOptional.get();
+            BeanUtils.copyProperties(trainingPlan, planHistoryDto);
+        }
+        return new Result(planHistoryDto);
+    }
+
 
     @Override
     public Result updatePlanProcess(Long serialNo, Integer actionNum, Integer actionSec) {

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -75,9 +76,9 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public Result getPlanToday(String userID) {
         PlanTodayDto planTodayDto = new PlanTodayDto();
-        Optional<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findByUserIDOrderByCreatedDateDesc(userID);
-        if(trainingPlanOptional.isPresent()){
-                TrainingPlan trainingPlan = trainingPlanOptional.get();
+        List<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findByUserIDOrderByCreatedDateDesc(userID);
+        if(trainingPlanOptional.isEmpty()){
+                TrainingPlan trainingPlan = trainingPlanOptional.get(0);
                 BeanUtils.copyProperties(trainingPlan, planTodayDto);
         } else {
             planTodayDto.setNewUser(Utils.USER_NEW);

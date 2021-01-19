@@ -36,5 +36,5 @@ public class TrainingPlan {
 
     // 整数百分比
     @Column(nullable = false)
-    private Integer actionPercent = 0;
+    private Integer actionSec = 0;
 }

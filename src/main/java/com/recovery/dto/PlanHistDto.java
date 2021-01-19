@@ -17,5 +17,5 @@ public class PlanHistDto {
     private String userID;
     private Integer planID;
     private Integer actionNum = 0;
-    private Integer actionPercent = 0;
+    private Integer actionSec = 0;
 }

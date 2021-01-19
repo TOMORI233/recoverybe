@@ -63,7 +63,7 @@ public class PlanServiceImpl implements PlanService {
             TrainingPlan existedPlan = trainingPlanOptional.get();
             existedPlan.setPlanID(planID);
             existedPlan.setActionNum(0);
-            existedPlan.setActionPercent(0);
+            existedPlan.setActionSec(0);
             trainingPlanRepository.save(existedPlan);
         } else {
             trainingPlanRepository.save(newPlan);
@@ -85,11 +85,11 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public Result updatePlanProcess(Long serialNo, Integer actionNum, Integer actionPercent) {
+    public Result updatePlanProcess(Long serialNo, Integer actionNum, Integer actionSec) {
         Optional<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findBySerialNo(serialNo);
         trainingPlanOptional.ifPresent(trainingPlan -> {
             trainingPlan.setActionNum(actionNum);
-            trainingPlan.setActionPercent(actionPercent);
+            trainingPlan.setActionSec(actionSec);
             trainingPlanRepository.save(trainingPlan);
         });
         return new Result();

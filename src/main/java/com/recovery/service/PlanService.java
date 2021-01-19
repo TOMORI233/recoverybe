@@ -11,5 +11,5 @@ public interface PlanService {
 
     Result getPlanHistByDate(String userID, Date date);
 
-    Result updatePlanProcess(Long serialNo, Integer actionNum, Integer actionPercent);
+    Result updatePlanProcess(Long serialNo, Integer actionNum, Integer actionSec);
 }

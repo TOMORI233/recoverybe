@@ -50,10 +50,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result createUser(String userID, Integer sex) {
-        UserInfo newUser = new UserInfo();
-        newUser.setUserID(userID);
-        newUser.setSex(sex);
-        userInfoRepository.save(newUser);
-        return new Result();
+        Optional<UserInfo> optional = userInfoRepository.findByUserID(userID);
+        Result result = new Result();
+        if(optional.isPresent()){
+            result.setMessage("用户已存在");
+        } else {
+            UserInfo newUser = new UserInfo();
+            newUser.setUserID(userID);
+            newUser.setSex(sex);
+            userInfoRepository.save(newUser);
+        }
+        return result;
     }
 }

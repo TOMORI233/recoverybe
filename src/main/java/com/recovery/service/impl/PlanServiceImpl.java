@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -75,11 +76,14 @@ public class PlanServiceImpl implements PlanService {
     public Result getPlanHistByDate(String userID, Date date) {
         PlanHistDto planHistDto = new PlanHistDto();
         Optional<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findByUserIDAndCreatedDateGreaterThanEqual(userID, date);
-        if(trainingPlanOptional.isPresent()){
+        if (trainingPlanOptional.isPresent()) {
             TrainingPlan trainingPlan = trainingPlanOptional.get();
             BeanUtils.copyProperties(trainingPlan, planHistDto);
         } else {
-            planHistDto.setNewUser(Utils.USER_NEW);
+            List<TrainingPlan> list = trainingPlanRepository.findByUserIDOrderByCreatedDateDesc(userID);
+            if (list.isEmpty()) {
+                planHistDto.setNewUser(Utils.USER_NEW);
+            }
         }
         return new Result(planHistDto);
     }

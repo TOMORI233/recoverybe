@@ -77,7 +77,7 @@ public class PlanServiceImpl implements PlanService {
     public Result getPlanToday(String userID) {
         PlanTodayDto planTodayDto = new PlanTodayDto();
         List<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findByUserIDOrderByCreatedDateDesc(userID);
-        if(trainingPlanOptional.isEmpty()){
+        if(!trainingPlanOptional.isEmpty()){
                 TrainingPlan trainingPlan = trainingPlanOptional.get(0);
                 BeanUtils.copyProperties(trainingPlan, planTodayDto);
         } else {

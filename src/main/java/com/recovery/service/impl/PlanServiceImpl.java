@@ -74,12 +74,28 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public Result getPlanToday(String userID) {
+    public Result getPlanToday(String userID) throws ParseException {
         PlanTodayDto planTodayDto = new PlanTodayDto();
+        SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
+        String strToday = sm.format(new Date());
         List<TrainingPlan> trainingPlanOptional = trainingPlanRepository.findByUserIDOrderByCreatedDateDesc(userID);
         if(!trainingPlanOptional.isEmpty()){
                 TrainingPlan trainingPlan = trainingPlanOptional.get(0);
-                BeanUtils.copyProperties(trainingPlan, planTodayDto);
+                if(sm.format(trainingPlan.getCreatedDate()).equals(strToday)){
+                    BeanUtils.copyProperties(trainingPlan, planTodayDto);
+                }else {
+                    TrainingPlan newTrainingPlan = new TrainingPlan();
+                    newTrainingPlan.setCreatedDate(new Date());
+                    newTrainingPlan.setActionNum(0);
+                    newTrainingPlan.setActionSec(0);
+                    newTrainingPlan.setUserID(trainingPlan.getUserID());
+                    newTrainingPlan.setPlanID(trainingPlan.getPlanID());
+                    trainingPlanRepository.save(newTrainingPlan);
+                    Date today = sm.parse(strToday);
+                    BeanUtils.copyProperties(trainingPlanRepository.findByUserIDAndCreatedDate(userID, today).get(), planTodayDto);
+
+                }
+
         } else {
             planTodayDto.setNewUser(Utils.USER_NEW);
         }

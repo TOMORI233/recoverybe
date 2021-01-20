@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Date;
 
 @Api(tags = "训练计划/方案管理")
@@ -26,7 +27,7 @@ public class PlanController {
 
     @ApiOperation(value = "查询当天方案")
     @GetMapping("/today")
-    public Result getPlanToday(@RequestParam(value = "userID") String userID) {
+    public Result getPlanToday(@RequestParam(value = "userID") String userID) throws ParseException {
         return planService.getPlanToday(userID);
     }
 
@@ -40,7 +41,7 @@ public class PlanController {
 
 
     @ApiOperation(value = "更新方案进度")
-    @PutMapping("/process")
+    @GetMapping("/process")
     public Result updatePlanProcess(@RequestParam(value = "serialNo") Long serialNo,
                                     @RequestParam(value = "actionNum") Integer actionNum,
                                     @RequestParam(value = "actionSec") Integer actionSec) {
